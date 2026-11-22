@@ -177,7 +177,7 @@
       if (!phone) { document.getElementById('phone').focus(); return; }
       if (!pin || pin.length !== 4) { document.getElementById('pin').focus(); return; }
 
-      const fullPhone = '+231' + phone;
+      const fullPhone = '' + phone;
 
       // Persist for the next step
       const planData = JSON.parse(localStorage.getItem('maxitPlanData')) || {};
